@@ -1,0 +1,99 @@
+:root {
+    --bg-color: #fafafa;
+    --white: #ffffff;
+    --text-primary: #262626;
+    --border-color: #dbdbdb;
+    --ig-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+/* --- Reset básico e Animação de Página --- */
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+    background-color: #efefef; 
+    display: flex; 
+    justify-content: center; 
+    min-height: 100vh; 
+    overflow-x: hidden;
+    /* Animação suave ao carregar qualquer página */
+    animation: fadeInPage 0.6s ease-out;
+}
+
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Container Principal (Celular) --- */
+.app-container { width: 100%; max-width: 450px; background-color: var(--white); min-height: 100vh; box-shadow: 0 0 30px rgba(0,0,0,0.15); position: relative; padding-bottom: 60px; }
+
+/* --- Animações Globais de Elementos --- */
+.pulse-click:active { transform: scale(0.95); transition: transform 0.1s; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate-in { animation: fadeUp 0.6s ease forwards; opacity: 0; }
+
+/* --- Header --- */
+header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border-color); background: var(--white); position: sticky; top: 0; z-index: 10; }
+.username { font-weight: 700; font-size: 1.1rem; }
+.actions i { font-size: 1.3rem; margin-left: 18px; cursor: pointer; }
+
+/* --- BIO SECTION (Atualizada) --- */
+.bio-container { position: relative; width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #000; }
+.bio-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0.3; z-index: 1; }
+.bio-content { position: relative; z-index: 2; text-align: center; padding: 20px; width: 100%; }
+/* Estilo para o texto "NOSSA PROGRAMAÇÃO" */
+.bio-title h1 { color: var(--white); font-size: 1.6rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.5); margin-bottom: 5px; }
+
+/* --- Destaques (Sem texto embaixo) --- */
+.highlights-scroll { display: flex; padding: 15px; gap: 18px; overflow-x: auto; scrollbar-width: none; }
+.highlights-scroll::-webkit-scrollbar { display: none; }
+.highlight { display: flex; flex-direction: column; align-items: center; min-width: 72px; cursor: pointer; transition: transform 0.2s; }
+.highlight:hover { transform: translateY(-3px); }
+.circle-wrap { padding: 3px; border-radius: 50%; background: var(--ig-gradient); position: relative; }
+.circle { width: 66px; height: 66px; border-radius: 50%; border: 3px solid var(--white); overflow: hidden; background: var(--white); }
+.circle img { width: 100%; height: 100%; object-fit: cover; }
+/* Esconde o span de texto dos destaques */
+.highlight span { display: none; }
+
+/* --- Grid de Posts --- */
+.posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 3px 0; }
+.grid-item { position: relative; aspect-ratio: 1/1; background-color: #eee; overflow: hidden; cursor: pointer; }
+.grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s, filter 0.3s; }
+.grid-item:hover img { transform: scale(1.08); filter: brightness(0.9); }
+.day-overlay { position: absolute; bottom: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); color: white; font-size: 0.85rem; text-align: center; padding: 8px 0 4px; font-weight: 600; letter-spacing: 0.5px; }
+
+/* --- Menu Inferior --- */
+.bottom-nav { position: absolute; bottom: 0; width: 100%; height: 55px; background: var(--white); border-top: 1px solid #eee; display: flex; justify-content: space-around; align-items: center; z-index: 9; }
+.bottom-nav a { color: var(--text-primary); font-size: 1.5rem; text-decoration: none; transition: transform 0.2s, color 0.2s; }
+.bottom-nav a:hover, .bottom-nav a.active { color: #dc2743; transform: scale(1.1); }
+.profile-link img { width: 28px; height: 28px; border-radius: 50%; border: 1px solid #ccc; padding: 1px; }
+
+/* --- MODAL DE STORIES --- */
+.story-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #000; z-index: 200; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.story-modal.active { opacity: 1; pointer-events: auto; }
+.story-progress-container { display: flex; gap: 5px; padding: 10px 5px; position: absolute; top: 0; width: 100%; z-index: 210; }
+.progress-bar { height: 3px; flex-grow: 1; background: rgba(255,255,255,0.3); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: var(--white); transition: width 0.1s linear; }
+.story-header { position: absolute; top: 25px; left: 10px; z-index: 210; color: white; display: flex; align-items: center; gap: 10px; }
+.story-avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--ig-gradient); }
+.story-username { font-weight: 600; font-size: 0.9rem; }
+.close-story { position: absolute; top: 25px; right: 15px; color: white; font-size: 1.5rem; z-index: 220; cursor: pointer; }
+.story-content { flex-grow: 1; display: flex; align-items: center; justify-content: center; position: relative; }
+.story-image { max-width: 100%; max-height: 85vh; object-fit: contain; }
+.tap-area { position: absolute; top: 0; height: 100%; width: 40%; z-index: 205; }
+.tap-left { left: 0; } .tap-right { right: 0; width: 60%; }
+
+/* --- ESTILOS DO CARROSSEL (Para o dia-modelo.html) --- */
+.carousel-container { position: relative; width: 100%; height: 450px; background: #f0f0f0; overflow: hidden; touch-action: pan-y; /* Permite scroll vertical da página, mas horizontal do carrossel */ }
+.carousel-slide { display: none; height: 100%; width: 100%; }
+/* Animação de deslizar suave */
+.carousel-slide.active { display: flex; align-items: center; justify-content: center; animation: slideIn 0.3s ease-in-out; }
+@keyframes slideIn { from { opacity: 0.8; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+/* Setas (ainda úteis para desktop) */
+.carousel-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.3); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; z-index: 5; transition: all 0.2s; }
+.carousel-prev { left: 10px; } .carousel-next { right: 10px; }
+/* Dots */
+.carousel-dots { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 5; }
+.dot { width: 6px; height: 6px; background: rgba(255,255,255,0.5); border-radius: 50%; transition: all 0.3s; }
+.dot.active { background: var(--white); transform: scale(1.3); }

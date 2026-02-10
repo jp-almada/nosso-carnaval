@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nosso Carnaval 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container" id="main-app">
+        <header>
+            <div class="username pulse-click">carnaval_nosso2026 <i class="fas fa-chevron-down" style="font-size: 0.8rem;"></i></div>
+            <div class="actions">
+                <i class="far fa-plus-square pulse-click"></i>
+                <i class="fas fa-bars pulse-click"></i>
+            </div>
+        </header>
+
+        <section class="bio-container pulse-click">
+            <div class="bio-bg" style="background-image: url('img/bio/fundo.jpeg');"></div> 
+            <div class="bio-content">
+                <div class="bio-title animate-in">
+                    <h1>NOSSA PROGRAMAÇÃO</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="highlights-scroll animate-in" style="animation-delay: 0.1s">
+            
+            <div class="highlight pulse-click" data-story="eu">
+                <div class="circle-wrap">
+                    <div class="circle">
+                        <img src="img/destaques/capa-eu.jpeg" alt="EU">
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight pulse-click" data-story="te">
+                <div class="circle-wrap">
+                    <div class="circle">
+                        <img src="img/destaques/capa-te.jpeg" alt="TE">
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight pulse-click" data-story="amo">
+                <div class="circle-wrap">
+                    <div class="circle">
+                        <img src="img/destaques/capa-amo.jpeg" alt="AMO">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="posts-grid animate-in" style="animation-delay: 0.2s" id="grid-posts">
+            </section>
+
+        <nav class="bottom-nav">
+            <a href="#" class="active pulse-click"><i class="fas fa-home"></i></a>
+            <a href="#" class="pulse-click"><i class="far fa-heart"></i></a>
+            <a href="#" class="pulse-click"><i class="far fa-heart"></i></a>
+            <a href="#" class="pulse-click"><i class="far fa-heart"></i></a>
+            
+            <a href="https://random.dog/" target="_blank" class="profile-link pulse-click">
+                <img src="img/perfil/avatar.jpeg" alt="Perfil">
+            </a>
+        </nav>
+    </div>
+
+    <div class="story-modal" id="storyModal">
+        <div class="story-progress-container" id="progressContainer">
+            </div>
+        
+        <div class="story-header">
+            <img src="img/perfil/avatar.jpeg" class="story-avatar" alt="User">
+            <span class="story-username" id="storyUsername">carnaval_nosso2026</span>
+        </div>
+        <i class="fas fa-times close-story" id="closeStoryBtn"></i>
+
+        <div class="story-content">
+            <div class="tap-area tap-left" id="tapLeft"></div>
+            <div class="tap-area tap-right" id="tapRight"></div>
+            <img src="" class="story-image" id="storyImage" alt="Story">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

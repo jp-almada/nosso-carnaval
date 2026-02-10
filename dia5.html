@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Programação</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .post-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #dbdbdb;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #262626;
+            font-size: 1.4rem;
+        }
+
+        .post-content {
+            padding: 20px;
+            background: #fff;
+            padding-bottom: 80px;
+        }
+
+        /* Espaço extra no fim */
+        .post-title {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #262626;
+        }
+
+        .post-desc {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            white-space: pre-line;
+            /* Mantém quebras de linha */
+        }
+
+        .love-note {
+            margin-top: 30px;
+            padding: 15px;
+            background: #fff0f5;
+            border-radius: 10px;
+            font-style: italic;
+            color: #dc2743;
+            font-weight: 500;
+            text-align: center;
+            border: 1px dashed #ffadd3;
+        }
+
+        .post-interactions {
+            display: flex;
+            gap: 15px;
+            padding: 12px 15px;
+            font-size: 1.5rem;
+            color: #262626;
+            background: #fff;
+        }
+
+        .post-interactions i {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .post-interactions i:hover {
+            color: #8e8e8e;
+        }
+
+        .liked {
+            color: #ed4956 !important;
+        }
+
+        /* Classe para coração clicado */
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="post-header">
+            <a href="index.html" class="back-btn pulse-click"><i class="fas fa-arrow-left"></i></a>
+            <div class="username">Domingo</div>
+        </header>
+
+        <div class="carousel-container" id="swipeCarousel">
+
+            <div class="carousel-slide active">
+                <img src="img/dias/dia5-1.png" alt="Foto 1">
+            </div>
+
+            <div class="carousel-slide">
+                <img src="img/dias/dia5-2.png" alt="Foto 2">
+            </div>
+
+            <div class="carousel-slide">
+                <img src="img/dias/dia5-3.png" alt="Foto 3">
+            </div>
+
+            <div class="carousel-slide">
+                <img src="img/dias/dia5-4.png" alt="Foto 4">
+            </div>
+
+            <div class="carousel-slide">
+                <img src="img/dias/dia5-5.png" alt="Foto 5">
+            </div>
+
+            <div class="carousel-nav carousel-prev pulse-click"><i class="fas fa-chevron-left"></i></div>
+            <div class="carousel-nav carousel-next pulse-click"><i class="fas fa-chevron-right"></i></div>
+            <div class="carousel-dots"></div>
+        </div>
+
+        <div class="post-interactions">
+            <i class="far fa-heart pulse-click" id="likeBtn"></i>
+            <i class="far fa-comment pulse-click"></i>
+            <i class="far fa-paper-plane pulse-click"></i>
+        </div>
+
+        <div class="post-content animate-in" style="animation-delay: 0.1s">
+
+            <h2 class="post-title">Dia 5: JF parte 2</h2>
+
+            <p class="post-desc">
+                Seguimos firmes e fortes na folia de JF:
+                🔋 <strong>Modo ativado:</strong> Explorando o melhor da cidade.
+                💃 <strong>Nós:</strong> Dançando até o pé doer (ou a fome bater).
+                <br>
+                Vamos curtir cada segundo dessa maratona juntos.
+            </p>
+
+            <p class="love-note">"Você é a melhor companhia do mundo."</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Lógica do Carrossel ---
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevBtn = document.querySelector('.carousel-prev');
+            const nextBtn = document.querySelector('.carousel-next');
+            const dotsContainer = document.querySelector('.carousel-dots');
+            const carouselContainer = document.getElementById('swipeCarousel');
+            let currentSlide = 0;
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            // Cria bolinhas
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dotsContainer.appendChild(dot);
+            });
+            const dots = document.querySelectorAll('.dot');
+
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+            }
+
+            function nextSlide() {
+                currentSlide++;
+                if (currentSlide >= slides.length) currentSlide = 0;
+                showSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide--;
+                if (currentSlide < 0) currentSlide = slides.length - 1;
+                showSlide(currentSlide);
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            // Swipe Touch
+            carouselContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            carouselContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchEndX < touchStartX - 50) nextSlide();
+                if (touchEndX > touchStartX + 50) prevSlide();
+            }, { passive: true });
+
+            // Like Button Animation
+            const likeBtn = document.getElementById('likeBtn');
+            likeBtn.addEventListener('click', () => {
+                likeBtn.classList.toggle('fas'); // Coração preenchido
+                likeBtn.classList.toggle('far'); // Coração vazio
+                likeBtn.classList.toggle('liked'); // Cor vermelha
+            });
+        });
+    </script>
+</body>
+
+</html>
